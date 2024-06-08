@@ -19,6 +19,9 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
+# filled_prompt = prompt.format(question="What is the weather going to be if it rained yesterday, but has been sunny since morning, in the summer season?")
+# print(filled_prompt)
+
 # StreamLit Framework
 
 st.title('LangChain Demo with Ollama (By, Sarthak Khanduja)')
