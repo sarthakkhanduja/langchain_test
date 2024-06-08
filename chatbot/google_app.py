@@ -14,9 +14,9 @@ os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 # Prompt Template
 prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are a professional assistant. Your job is to provide the best possible answer to any query "
+        ("system", "You are a professional chef. Your job is to provide the best possible recipe for the ingredients available with the user (separated by a comma). The user prefers Indian cuisine,  and you can assume the user has spices available."
                    "that the user might have"),
-        ("user", "Question: {question}")
+        ("user", "List of Ingredients: {question}")
     ]
 )
 
@@ -25,8 +25,8 @@ prompt = ChatPromptTemplate.from_messages(
 
 # StreamLit Framework
 
-st.title('LangChain Demo with Google Gemini Pro (By, Sarthak Khanduja)')
-input_text = st.text_input("Feel free to enter your query in a complete sentence")
+st.title('Kitchen AI with Google Gemini Pro (By, Sarthak Khanduja)')
+input_text = st.text_input("Please enter the list of ingredients separated by a comma")
 
 # Ollama LLM
 llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest")
