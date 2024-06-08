@@ -1,1 +1,33 @@
-from langchain_openai
+from langchain_community.llms import Ollama
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+import streamlit as st
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
+
+# Prompt Template
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are a professional assistant. Your job is to provide the best possible answer to any query "
+                   "that the user might have"),
+        ("user", "Question: {question}")
+    ]
+)
+
+# StreamLit Framework
+
+st.title('LangChain Demo with Ollama (By, Sarthak Khanduja)')
+input_text = st.text_input("Feel free to enter your query in a complete sentence")
+
+# Ollama LLM
+llm = Ollama(model="llama2")
+output_parser = StrOutputParser()
+chain = prompt | llm | output_parser
+
+if input_text:
+    st.write(chain.invoke({'question' : input_text}))
